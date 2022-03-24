@@ -1,0 +1,30 @@
+// create card
+        	RequestData messageData = new RequestData();
+			CreateCardRequest cardRequest = new CreateCardRequest();
+			cardRequest.setBranch("051");// chi nhanh
+			cardRequest.setShortName("VU TRUNG KIEN");
+			cardRequest.setFirstName("VU");
+			cardRequest.setMiddleName("TRUNG");
+			cardRequest.setLastName("KIEN");
+			cardRequest.setGender("M");
+			cardRequest.setCardType("STD"); // STD: the standard, TH: the TH
+			cardRequest.setClientNumber("00007011"); // so cif
+			cardRequest.setAccountNo("000001000000797");	// TK corebank
+			cardRequest.setIdentityCardType("NIC");	// loai giay to	
+			cardRequest.setIdentityCardNumber("00408000000012"); // so giay to
+			cardRequest.setBirthPlace("HA NOI"); 
+			cardrequest.setemail("kienvt@seatechit.com.vn");
+			cardRequest.setMobilePhone("0948651441");
+			cardRequest.setRegistrationDate("2020-10-10");
+			cardRequest.setCity("HA NOI");
+			cardRequest.setAddressLine1("12 CHAU LONG"); // số nhà
+			cardRequest.setAddressLine2("TRUC BACH"); // phường xã
+			cardRequest.setDeliveryaddress("THIEN DUONG"); // địa chỉ nhận thẻ
+			
+			messageData.setCreateCardRequest(cardRequest);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("messageData", messageData);
+			map.put("tranSn", KeyGenerator.singleton.getKey());
+			this.sendMessage(map, Global.MSG_EKYC_CREATE_CARD); 
+			String responseCode = respMess.getResult().getCode(); // 0: sucess, other: error
+			String cardNo = respMess.getBody().getCreateCardResponse().getCardNumber();
